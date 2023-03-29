@@ -1,11 +1,25 @@
 body {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 2em;
+  left: 2em;
   margin: 0;
   padding: 20px;
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+.furnCard {
+  padding: 1em;
+  border: 1px solid rgba(128, 128, 128, 0.438);
+  border-radius: 20px;
+
+  img {
+    max-height: 200px;
+  }
+
+  
+}
+
+
 
 
 
