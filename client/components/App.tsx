@@ -1,4 +1,5 @@
-import List from './List'
+import FetchList from './FetchList'
+import AddItemForm from './AddItemForm'
 
 function App() {
   return (
@@ -6,9 +7,10 @@ function App() {
       <header className="header">
         <h1>My Collection</h1>
       </header>
-      <section className="main">
-        <List />
-      </section>
+      <div className="main">
+        <AddItemForm />
+        <FetchList />
+      </div>
     </>
   )
 }

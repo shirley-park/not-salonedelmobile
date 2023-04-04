@@ -1,9 +1,23 @@
 import request from 'superagent'
-// import router from '../../server/routes/furnListRouter'
-import FurnitureModel from '../models/Furnmodel'
 
-export function fetchFurnList(): Promise<FurnitureModel> {
-  // 3. API request to reddit client/apis/reddit.ts
-  return request.get('/').then((res) => res.body)
-  // .catch((err) => err.message)
+import FurnitureModel from '../models/Furnituremodel'
+
+const Url = '/api/v1/mycollection/'
+
+export function fetchFurnListApi(): Promise<FurnitureModel[]> {
+  // 3. API request to the server (router and db)
+  return request.get(Url).then((res) => res.body)
+}
+
+export function addFurnItemApi(
+  newItem: FurnitureModel
+): Promise<FurnitureModel> {
+  return request
+    .post(Url)
+    .send(newItem)
+    .then((res) => res.body)
+}
+
+export function deleteItemApi(id: FurnitureModel['id']) {
+  return request.delete(Url + id).then((res) => res.body)
 }

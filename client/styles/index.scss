@@ -7,18 +7,55 @@ body {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+.cardFlexContainer {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  // align-items: flex-end;
+  flex-wrap: wrap-reverse;
+  align-content: center;
+
+  /* display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: ;
+  justify-items: center;
+  gap: 30px; */
+}
+
+
+/* CARDS */
+
 .furnCard {
-  padding: 1em;
+  margin-top: 20px;
+  margin-right: 20px;
+  padding: 1.5em;
   border: 1px solid rgba(128, 128, 128, 0.438);
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
 
-  img {
-    max-height: 200px;
-  }
-
+}
+.furnCard img {
+  margin-top: 20px;
+  width: 200px;
+  height: 350px;
+  object-fit: cover;
+  width: 350px;
   
 }
 
+h2.furnName {
+  margin-top: 10;
+  margin-bottom: 0;
+}
+
+.h1DeleteBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
 
 

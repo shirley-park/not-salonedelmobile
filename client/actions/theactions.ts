@@ -1,33 +1,106 @@
 import type { ThunkAction } from '../store'
 
 // import the function from furnListApi
-import { fetchFurnList } from '../apis/furnListApi'
+import {
+  fetchFurnListApi,
+  addFurnItemApi,
+  deleteItemApi,
+} from '../apis/furnListApi'
 
 // import the furn model from
-import FurnitureModel from '../models/Furnmodel'
+import FurnitureModel from '../models/Furnituremodel'
+
+// export const REQUEST_ITEMS = 'REQUEST_ITEMS'
+export const RECEIVE_ITEMS = 'RECEIVE_ITEMS'
+export const ADD_ITEM = 'ADD_ITEM'
+export const SUBMIT_FORM = 'SUBMIT_FORM'
+export const DEL_ITEM = 'DEL_ITEM'
 
 export type Action =
-  | { type: 'REQUEST_ITEMS'; payload: null }
   | { type: 'RECEIVE_ITEMS'; payload: FurnitureModel[] }
-// | { type: 'ADD_ITEMS'; payload: { name: string; designer: string; image: string }
-// | { type: 'DEL_ITEMS'; payload: number }
+  | { type: 'SUBMIT_FORM'; payload: boolean }
+  | { type: 'ADD_ITEM'; payload: FurnitureModel }
+  | { type: 'DEL_ITEM'; payload: number }
 
-// add actions
+// -----------SIMPLE ACTIONS-----------//
 
-export function requestAllItems(): Action {
-  return {
-    type: 'REQUEST_ITEMS',
-    payload: null,
-  }
-}
-
-// ------- START HERE GOING FORWARD ------- //
-
-export function receiveAllItems(): Action {
+// RECEIVE ITEMS
+function receiveAllItems(dbData: FurnitureModel[]): Action {
   return {
     type: 'RECEIVE_ITEMS',
-    payload: fullList.map((item) => item),
+    payload: dbData,
   }
 }
 
-// add Thunk function
+// SUBMIT ADD FORM
+function addFormSubmit(): Action {
+  return {
+    type: 'SUBMIT_FORM',
+    payload: true,
+  }
+}
+
+// ADD ITEM
+function addNewItem(newItem: FurnitureModel): Action {
+  return {
+    type: 'ADD_ITEM',
+    payload: newItem,
+  }
+}
+
+// DELETE ITEM
+function deleteItem(id: FurnitureModel['id']): Action {
+  return {
+    type: 'DEL_ITEM',
+    payload: id,
+  }
+}
+
+// -----------THUNKS-----------//
+
+// FETCH ALL Thunk
+export function fetchAllThunk(): ThunkAction {
+  return (dispatch) => {
+    // fetchFurnList from API
+    return fetchFurnListApi()
+      .then((data) => {
+        console.log(data)
+        dispatch(receiveAllItems(data))
+      })
+      .catch((err) => {
+        err.message
+      })
+  }
+}
+
+// ADD NEW ITEM Thunk
+export function addNewItemThunk(formInput: FurnitureModel): ThunkAction {
+  return (dispatch) => {
+    dispatch(addFormSubmit())
+    // addItem API function
+    return (
+      addFurnItemApi(formInput)
+        // then dispatch the added item to the reducer
+        .then((newItem) => {
+          dispatch(addNewItem(newItem))
+        })
+        .catch((err) => {
+          err.message
+        })
+    )
+  }
+}
+
+// DELETE Item Thunk
+export function deleteItemThunk(id: FurnitureModel['id']): ThunkAction {
+  return (dispatch) => {
+    dispatch(deleteItem(id))
+    return deleteItemApi(id)
+      .then(() => {
+        fetchAllThunk()
+      })
+      .catch((err) => {
+        err.message
+      })
+  }
+}
