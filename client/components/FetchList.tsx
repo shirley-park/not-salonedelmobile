@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../hooks/redux'
 
 // import ListItems from './ListItems'
-import { useEffect, useState, FormEvent } from 'react'
+import { useEffect } from 'react'
 
 import { fetchAllThunk } from '../actions/theactions'
 import ListItems from './ListItems'

@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
 import FurnitureModel from '../models/Furnituremodel'
-import { useEffect, FormEvent } from 'react'
+import { useEffect } from 'react'
 import { fetchAllThunk, deleteItemThunk } from '../actions/theactions'
 
 // delete button style
@@ -16,14 +16,11 @@ function ListItems() {
 
   const dispatch = useAppDispatch()
 
-  const handleDelete = async (id: number, e: FormEvent) => {
-    {
-      e.preventDefault()
-      dispatch(deleteItemThunk(id))
-      // const updatedList = await fetchFurnListApi()
-      // setListState(updatedList)
-    }
+  const handleDelete = async (id: number) => {
+    await dispatch(deleteItemThunk(id))
+    dispatch(fetchAllThunk())
   }
+
   useEffect(() => {
     dispatch(fetchAllThunk())
   }, [dispatch])
@@ -37,14 +34,18 @@ function ListItems() {
               <div className="h1DeleteBlock">
                 <h2 className="furnName">{item.name}</h2>
 
-                <Stack direction="row" alignItems="center" spacing={1}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  spacing={1}
+                  onClick={() => {
+                    handleDelete(item.id)
+                  }}
+                >
                   <IconButton
                     aria-label="delete"
                     size="large"
                     className="deleteButton"
-                    onClick={(e) => {
-                      handleDelete(item.id, e)
-                    }}
                   >
                     <DeleteIcon fontSize="inherit" />
                   </IconButton>
@@ -52,7 +53,6 @@ function ListItems() {
               </div>
 
               <h3>{item.designer}</h3>
-              {/* <button className="deleteButton">x</button> */}
 
               <img src={item.imageURL} alt={item.name} />
             </div>
