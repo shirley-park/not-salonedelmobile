@@ -5,6 +5,7 @@ import {
   fetchFurnListApi,
   addFurnItemApi,
   deleteItemApi,
+  // updateItemApi,
 } from '../apis/furnListApi'
 
 // import the furn model from
@@ -15,12 +16,17 @@ export const RECEIVE_ITEMS = 'RECEIVE_ITEMS'
 export const ADD_ITEM = 'ADD_ITEM'
 export const SUBMIT_FORM = 'SUBMIT_FORM'
 export const DEL_ITEM = 'DEL_ITEM'
+export const UPDATE_ITEM = 'UPDATE_ITEM'
 
 export type Action =
   | { type: 'RECEIVE_ITEMS'; payload: FurnitureModel[] }
   | { type: 'SUBMIT_FORM'; payload: boolean }
   | { type: 'ADD_ITEM'; payload: FurnitureModel }
   | { type: 'DEL_ITEM'; payload: number }
+  | {
+      type: 'UPDATE_ITEM'
+      payload: { currentItem: FurnitureModel; updatedItem: FurnitureModel }
+    }
 
 // -----------SIMPLE ACTIONS-----------//
 
@@ -53,6 +59,17 @@ function deleteItem(id: FurnitureModel['id']): Action {
   return {
     type: 'DEL_ITEM',
     payload: id,
+  }
+}
+
+// UPDATE ITEM
+export function updateItem(
+  currentItem: FurnitureModel,
+  updatedItem: FurnitureModel
+) {
+  return {
+    type: 'UPDATE_ITEM',
+    payload: { currentItem: currentItem, updatedItem: updatedItem },
   }
 }
 
@@ -94,13 +111,36 @@ export function addNewItemThunk(formInput: FurnitureModel): ThunkAction {
 // DELETE Item Thunk
 export function deleteItemThunk(id: FurnitureModel['id']): ThunkAction {
   return (dispatch) => {
-    dispatch(deleteItem(id))
-    return deleteItemApi(id)
-      .then(() => {
-        fetchAllThunk()
-      })
-      .catch((err) => {
-        err.message
-      })
+    // deleteItem Api
+    return (
+      deleteItemApi(id)
+        // dispatch the delete action
+        .then(() => {
+          dispatch(deleteItem(id))
+        })
+        .catch((err) => {
+          err.message
+        })
+    )
   }
 }
+
+// UPDATE item Thunk
+// export function updateItemThunk(
+//   currentItem: FurnitureModel,
+//   updatedItem: FurnitureModel
+// ): ThunkAction {
+//   return (dispatch) => {
+//     // dispatch the updateItem action
+//     dispatch(updateItem(currentItem, updatedItem))
+
+//     // updateItem Api function
+//     return updateItemApi(currentItem, updatedItem)
+//       .then(() => {
+//         fetchAllThunk()
+//       })
+//       .catch((err: Error) => {
+//         err.message
+//       })
+//   }
+// }

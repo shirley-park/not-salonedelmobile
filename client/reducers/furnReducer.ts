@@ -3,6 +3,7 @@ import {
   RECEIVE_ITEMS,
   ADD_ITEM,
   DEL_ITEM,
+  UPDATE_ITEM,
 } from '../actions/theactions'
 import FurnitureModel from '../models/Furnituremodel'
 
@@ -23,6 +24,14 @@ function furnReducer(
       return state.filter((item) => {
         item.id !== payload
       })
+    // case UPDATE_ITEM:
+    //   return state.map((itemObj: FurnitureModel) => {
+    //     if (itemObj.id === currentItem.id) {
+    //       itemObj.name = updatedItem.name
+    //       itemObj.designer = updatedItem.designer
+    //       itemObj.imageURL = updatedItem.imageURL
+    //     }
+    //   })
     default:
       return state
   }

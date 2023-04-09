@@ -5,21 +5,26 @@ import { useAppDispatch } from '../hooks/redux'
 // import { useState } from 'react'
 
 // delete button style
-// import * as React from 'react'
-import Stack from '@mui/material/Stack'
 import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
+// edit icon
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
+import { Icon } from '@mui/material'
 
 function ListItem({ furnObj }: { furnObj: FurnitureModel }) {
-  console.log(furnObj)
+  // console.log(furnObj)
 
   const dispatch = useAppDispatch()
 
   // const [item, setListItem] = useState(furnObj)
 
+  // const handleEdit = async (id: number) => {
+  //   await dispatch(editItemThunk())
+  // }
+
   const handleDelete = async (id: number) => {
     await dispatch(deleteItemThunk(id))
-    dispatch(fetchAllThunk())
+    // dispatch(fetchAllThunk())
     // setListItem({ id: 0, name: '', designer: '', imageURL: '' })
   }
 
@@ -27,18 +32,28 @@ function ListItem({ furnObj }: { furnObj: FurnitureModel }) {
     <div className="furnCard">
       <div className="h1DeleteBlock">
         <h2 className="furnName">{furnObj.name}</h2>
-        <Stack
-          direction="row"
-          alignItems="center"
-          spacing={1}
-          onClick={() => {
-            handleDelete(furnObj.id)
-          }}
-        >
-          <IconButton aria-label="delete" size="large" className="deleteButton">
+        <div className="editDeleteIcons">
+          <IconButton
+            aria-label="edit"
+            size="large"
+            className="editButton"
+            // onClick={() => {
+            //   handleEdit(furnObj.id)
+            // }}
+          >
+            <EditOutlinedIcon fontSize="inherit" />
+          </IconButton>
+          <IconButton
+            aria-label="delete"
+            size="large"
+            className="deleteButton"
+            onClick={() => {
+              handleDelete(furnObj.id)
+            }}
+          >
             <DeleteIcon fontSize="inherit" />
           </IconButton>
-        </Stack>
+        </div>
       </div>
 
       <h3>{furnObj.designer}</h3>

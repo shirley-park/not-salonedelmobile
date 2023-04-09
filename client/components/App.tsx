@@ -10,15 +10,17 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchAllThunk())
-  }, [dispatch])
+  }, [])
 
   return (
     <>
       <header className="header">
         <h1>My Collection</h1>
       </header>
-      <div className="main">
+      <div>
         <AddItemForm />
+      </div>
+      <div className="main">
         <List />
       </div>
     </>

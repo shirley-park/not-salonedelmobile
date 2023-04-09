@@ -29,4 +29,11 @@ router.delete('/:id', (req, res) => {
     .catch((err) => err.message)
 })
 
+// router.patch('/', (req, res) => {
+//   const updatedItem = req.body
+//   db.updateItem(updatedItem)
+//     .then((updatedItem) => res.json(updatedItem))
+//     .catch((err) => err.message)
+// })
+
 export default router

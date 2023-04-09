@@ -1,20 +1,27 @@
 body {
-  position: absolute;
-  top: 2em;
-  left: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // top: 2em;
+  // left: 2em;
   margin: 0;
   padding: 20px;
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.cardFlexContainer {
+// CARD CONTAINER
+
+section .cardFlexContainer {
   margin-top: 40px;
+  margin: 0;
   display: flex;
   flex-direction: row-reverse;
-  justify-content: flex-end;
+  justify-content: center;
   // align-items: flex-end;
   flex-wrap: wrap-reverse;
   align-content: center;
+  align-items: center;
 
   /* display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -23,14 +30,13 @@ body {
   gap: 30px; */
 }
 
-
-/* CARDS */
+// CARDS
 
 .furnCard {
   margin-top: 20px;
   margin-right: 20px;
   padding: 1.5em;
-  border: 1px solid rgba(128, 128, 128, 0.438);
+  border: 1px solid rgba(148, 148, 148, 0.438);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -46,17 +52,26 @@ body {
   
 }
 
-h2.furnName {
-  margin-top: 10;
-  margin-bottom: 0;
-}
+// h2.furnName {
+
+// }
 
 .h1DeleteBlock {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+}
+
+.editDeleteIcons {
+color:rgb(105, 105, 105)
+
 }
 
 
+// text colors
 
+h1, h2 {
+color:rgb(105, 105, 105)
+}
 

@@ -22,3 +22,7 @@ export function addNewItem(
 export function deleteItem(id: number, db = connection) {
   return db('furniture').where('id', id).delete()
 }
+
+export function updateItem(updItem: FurnitureModel, db = connection) {
+  return db('furniture').where('id', updItem.id).update(updItem)
+}
