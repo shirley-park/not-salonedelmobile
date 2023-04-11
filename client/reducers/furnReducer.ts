@@ -20,18 +20,25 @@ function furnReducer(
       return payload
     case ADD_ITEM:
       return state.concat(payload)
+
     case DEL_ITEM:
       return state.filter((item) => {
-        item.id !== payload
+        // *** added return here
+        return item.id !== payload
       })
-    // case UPDATE_ITEM:
-    //   return state.map((itemObj: FurnitureModel) => {
-    //     if (itemObj.id === currentItem.id) {
-    //       itemObj.name = updatedItem.name
-    //       itemObj.designer = updatedItem.designer
-    //       itemObj.imageURL = updatedItem.imageURL
-    //     }
-    //   })
+    case UPDATE_ITEM:
+      return state.map((itemObj: FurnitureModel) => {
+        if (itemObj.id === payload.id) {
+          return (
+            // itemObj.name = updatedItem.name,
+            // itemObj.designer = updatedItem.designer,
+            // itemObj.imageURL = updatedItem.imageURL
+            (itemObj = payload)
+          )
+        } else {
+          return itemObj
+        }
+      })
     default:
       return state
   }

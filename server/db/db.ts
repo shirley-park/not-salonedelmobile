@@ -14,15 +14,22 @@ export function addNewItem(
   newItem: FurnitureModel,
   db = connection
 ): Promise<FurnitureModel> {
-  return db('furniture')
-    .insert(newItem)
-    .returning(['name', 'designer', 'imageURL'])
+  return (
+    db('furniture')
+      .insert(newItem)
+      // *** forgot to add 'id' to the .returning statement
+      .returning(['id', 'name', 'designer', 'imageURL'])
+  )
 }
 
 export function deleteItem(id: number, db = connection) {
   return db('furniture').where('id', id).delete()
 }
 
-export function updateItem(updItem: FurnitureModel, db = connection) {
-  return db('furniture').where('id', updItem.id).update(updItem)
+export function updateItem(
+  id: number,
+  updItem: FurnitureModel,
+  db = connection
+) {
+  return db('furniture').where('id', id).update(updItem)
 }

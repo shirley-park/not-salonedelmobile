@@ -16,10 +16,11 @@ function List() {
   // useEffect(() => {
   //   dispatch(fetchAllThunk())
   // }, [dispatch])
+
   console.log(currFurnDb)
   return (
     <>
-      <section className="cardFlexContainer">
+      <section className="cardContainer">
         {currFurnDb.map((furnObj) => (
           <ListItem key={furnObj.id} furnObj={furnObj} />
         ))}

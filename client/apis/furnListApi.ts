@@ -22,12 +22,9 @@ export function deleteItemApi(id: FurnitureModel['id']) {
   return request.delete(Url + id).then((res) => res.body)
 }
 
-// export function updateItemApi(
-//   currentItem: FurnitureModel,
-//   updatedItem: FurnitureModel
-// ) {
-//   return request
-//     .patch(Url)
-//     .send(updatedItem)
-//     .then((res) => res.body)
-// }
+export function updateItemApi(id: number, updatedItem: FurnitureModel) {
+  return request
+    .patch(Url + id)
+    .send(updatedItem)
+    .then((res) => res.body)
+}

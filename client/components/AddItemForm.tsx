@@ -4,11 +4,15 @@ import { addNewItemThunk } from '../actions/theactions'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import FurnitureModel from '../models/Furnituremodel'
 
+// import * as React from 'react'
+import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+
 function AddItemForm() {
   const dispatch = useAppDispatch()
 
   const [formDeets, setFormDeets] = useState({
-    // id: 1,
+    // id: 0,
     // name: '',
     // designer: '',
     // imageURL: '',
@@ -22,47 +26,89 @@ function AddItemForm() {
   }
 
   const handleSubmit = (e: FormEvent) => {
+    console.log(formDeets)
     e.preventDefault()
-    dispatch(addNewItemThunk(formDeets))
+    return dispatch(addNewItemThunk(formDeets))
   }
 
   return (
     <>
-      {/* <button>Add new item</button> */}
       <div className="addFormContainer">
-        <form onSubmit={handleSubmit}>
-          <label>
+        {/* <form onSubmit={handleSubmit}> */}
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': { m: 1, width: '25ch' },
+          }}
+          noValidate
+          autoComplete="off"
+          onSubmit={handleSubmit}
+        >
+          <TextField
+            onChange={changeHandler}
+            // id="filled-basic"
+            label="Item name"
+            id="name"
+            value={formDeets.name || ''}
+            variant="filled"
+            className="textField"
+            required
+          />
+          <TextField
+            onChange={changeHandler}
+            // id="filled-basic"
+            label="Designer"
+            id="designer"
+            value={formDeets.designer || ''}
+            variant="filled"
+            className="textField"
+            required
+          />
+          <TextField
+            onChange={changeHandler}
+            // id="filled-basic"
+            label="Image URL"
+            id="imageURL"
+            value={formDeets.imageURL || ''}
+            variant="filled"
+            className="textField"
+            required
+          />
+          <button type="submit" className="addButton">
+            Add
+          </button>
+        </Box>
+
+        {/* <label>
             Item name:
             <input
               onChange={changeHandler}
               type="text"
-              // name="itemName"
               id="name"
               value={formDeets.name || ''}
             />
+            <br />
           </label>
           <label>
             Designer:
             <input
               onChange={changeHandler}
               type="text"
-              // name="designer"
               id="designer"
               value={formDeets.designer || ''}
             />
+            <br />
           </label>
           <label>
             imageURL:
             <input
               onChange={changeHandler}
               type="text"
-              // name="imageURL"
               id="imageURL"
               value={formDeets.imageURL || ''}
             />
-          </label>
-          <button type="submit">Add</button>
-        </form>
+          </label> */}
+        {/* </form> */}
       </div>
     </>
   )

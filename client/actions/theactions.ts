@@ -5,7 +5,7 @@ import {
   fetchFurnListApi,
   addFurnItemApi,
   deleteItemApi,
-  // updateItemApi,
+  updateItemApi,
 } from '../apis/furnListApi'
 
 // import the furn model from
@@ -20,12 +20,12 @@ export const UPDATE_ITEM = 'UPDATE_ITEM'
 
 export type Action =
   | { type: 'RECEIVE_ITEMS'; payload: FurnitureModel[] }
-  | { type: 'SUBMIT_FORM'; payload: boolean }
+  // | { type: 'SUBMIT_FORM'; payload: boolean }
   | { type: 'ADD_ITEM'; payload: FurnitureModel }
   | { type: 'DEL_ITEM'; payload: number }
   | {
       type: 'UPDATE_ITEM'
-      payload: { currentItem: FurnitureModel; updatedItem: FurnitureModel }
+      payload: FurnitureModel
     }
 
 // -----------SIMPLE ACTIONS-----------//
@@ -39,12 +39,12 @@ function receiveAllItems(dbData: FurnitureModel[]): Action {
 }
 
 // SUBMIT ADD FORM
-function addFormSubmit(): Action {
-  return {
-    type: 'SUBMIT_FORM',
-    payload: true,
-  }
-}
+// function addFormSubmit(): Action {
+//   return {
+//     type: 'SUBMIT_FORM',
+//     payload: true,
+//   }
+// }
 
 // ADD ITEM
 function addNewItem(newItem: FurnitureModel): Action {
@@ -63,13 +63,10 @@ function deleteItem(id: FurnitureModel['id']): Action {
 }
 
 // UPDATE ITEM
-export function updateItem(
-  currentItem: FurnitureModel,
-  updatedItem: FurnitureModel
-) {
+export function updateItem(updatedItem: FurnitureModel) {
   return {
     type: 'UPDATE_ITEM',
-    payload: { currentItem: currentItem, updatedItem: updatedItem },
+    payload: updatedItem,
   }
 }
 
@@ -90,10 +87,11 @@ export function fetchAllThunk(): ThunkAction {
   }
 }
 
-// ADD NEW ITEM Thunk
+// ADD Item Thunk
 export function addNewItemThunk(formInput: FurnitureModel): ThunkAction {
   return (dispatch) => {
-    dispatch(addFormSubmit())
+    // NOT NEEDED
+    // dispatch(addFormSubmit())
     // addItem API function
     return (
       addFurnItemApi(formInput)
@@ -111,8 +109,8 @@ export function addNewItemThunk(formInput: FurnitureModel): ThunkAction {
 // DELETE Item Thunk
 export function deleteItemThunk(id: FurnitureModel['id']): ThunkAction {
   return (dispatch) => {
-    // deleteItem Api
     return (
+      // deleteItem Api
       deleteItemApi(id)
         // dispatch the delete action
         .then(() => {
@@ -125,22 +123,23 @@ export function deleteItemThunk(id: FurnitureModel['id']): ThunkAction {
   }
 }
 
-// UPDATE item Thunk
-// export function updateItemThunk(
-//   currentItem: FurnitureModel,
-//   updatedItem: FurnitureModel
-// ): ThunkAction {
-//   return (dispatch) => {
-//     // dispatch the updateItem action
-//     dispatch(updateItem(currentItem, updatedItem))
+// UPDATE Item Thunk
+export function updateItemThunk(
+  id: number,
+  updatedItem: FurnitureModel
+): ThunkAction {
+  return (dispatch) => {
+    console.log(updatedItem)
+    // dispatch the updateItem action
+    dispatch(updateItem(updatedItem))
 
-//     // updateItem Api function
-//     return updateItemApi(currentItem, updatedItem)
-//       .then(() => {
-//         fetchAllThunk()
-//       })
-//       .catch((err: Error) => {
-//         err.message
-//       })
-//   }
-// }
+    // updateItem Api function
+    return updateItemApi(id, updatedItem)
+      .then(() => {
+        dispatch(fetchAllThunk())
+      })
+      .catch((err: Error) => {
+        err.message
+      })
+  }
+}
