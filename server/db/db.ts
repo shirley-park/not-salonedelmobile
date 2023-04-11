@@ -7,7 +7,7 @@ const environment = (process.env.NODE_ENV as Environment) || 'development'
 const connection = knex(config[environment])
 
 export function getAllItems(db = connection): Promise<FurnitureModel[]> {
-  return db('furniture').select()
+  return db('furniture').select().orderBy('id', 'desc')
 }
 
 export function addNewItem(
@@ -19,6 +19,7 @@ export function addNewItem(
       .insert(newItem)
       // *** forgot to add 'id' to the .returning statement
       .returning(['id', 'name', 'designer', 'imageURL'])
+      .then((theNewItemArr) => theNewItemArr[0])
   )
 }
 

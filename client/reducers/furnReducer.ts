@@ -19,8 +19,9 @@ function furnReducer(
     case RECEIVE_ITEMS:
       return payload
     case ADD_ITEM:
-      return state.concat(payload)
-
+      // return state.concat(payload)
+      console.log(payload)
+      return [payload, ...state]
     case DEL_ITEM:
       return state.filter((item) => {
         // *** added return here
