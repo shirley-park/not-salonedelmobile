@@ -14,13 +14,10 @@ export function addNewItem(
   newItem: FurnitureModel,
   db = connection
 ): Promise<FurnitureModel> {
-  return (
-    db('furniture')
-      .insert(newItem)
-      // *** forgot to add 'id' to the .returning statement
-      .returning(['id', 'name', 'designer', 'imageURL'])
-      .then((theNewItemArr) => theNewItemArr[0])
-  )
+  return db('furniture')
+    .insert(newItem)
+    .returning(['id', 'name', 'designer', 'imageURL'])
+    .then((theNewItemArr) => theNewItemArr[0])
 }
 
 export function deleteItem(id: number, db = connection) {
