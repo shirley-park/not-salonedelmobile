@@ -20,22 +20,15 @@ function furnReducer(
       return payload
     case ADD_ITEM:
       // return state.concat(payload)
-      console.log(payload)
       return [payload, ...state]
     case DEL_ITEM:
       return state.filter((item) => {
-        // *** added return here
         return item.id !== payload
       })
     case UPDATE_ITEM:
       return state.map((itemObj: FurnitureModel) => {
         if (itemObj.id === payload.id) {
-          return (
-            // itemObj.name = updatedItem.name,
-            // itemObj.designer = updatedItem.designer,
-            // itemObj.imageURL = updatedItem.imageURL
-            (itemObj = payload)
-          )
+          return (itemObj = payload)
         } else {
           return itemObj
         }

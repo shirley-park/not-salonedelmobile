@@ -9,18 +9,14 @@ import IconButton from '@mui/material/IconButton'
 import DeleteIcon from '@mui/icons-material/Delete'
 // edit icon
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined'
-import { Icon } from '@mui/material'
 
 function ListItem({ furnObj }: { furnObj: FurnitureModel }) {
-  // console.log(furnObj)
-
   const dispatch = useAppDispatch()
 
   const [formVisible, toggleVisibility] = useState(false)
 
   const toggleVisible = () => {
     toggleVisibility(!formVisible)
-    console.log(formVisible)
   }
 
   const [formDeets, setFormDeets] = useState({} as FurnitureModel)
@@ -28,7 +24,6 @@ function ListItem({ furnObj }: { furnObj: FurnitureModel }) {
   useEffect(() => {}, [formDeets])
 
   const changeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
     setFormDeets({
       ...formDeets,
       [e.target.id]: e.target.value,
@@ -37,13 +32,12 @@ function ListItem({ furnObj }: { furnObj: FurnitureModel }) {
 
   const handleSubmitEdit = (e: FormEvent) => {
     e.preventDefault()
-    console.log('1.' + formDeets)
     dispatch(updateItemThunk(furnObj.id, formDeets))
       .then(() => {
         toggleVisibility(!formVisible)
       })
       .catch((err) => {
-        console.log(err.message)
+        throw new Error(err.message)
       })
   }
 

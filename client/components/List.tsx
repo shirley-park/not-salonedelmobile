@@ -11,13 +11,6 @@ function List() {
     (state) => state.currentListState as FurnitureModel[]
   )
 
-  // const dispatch = useAppDispatch()
-
-  // useEffect(() => {
-  //   dispatch(fetchAllThunk())
-  // }, [dispatch])
-
-  console.log(currFurnDb)
   return (
     <>
       <section className="cardContainer">

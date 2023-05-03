@@ -8,10 +8,8 @@ import {
   updateItemApi,
 } from '../apis/furnListApi'
 
-// import the furn model from
 import FurnitureModel from '../models/Furnituremodel'
 
-// export const REQUEST_ITEMS = 'REQUEST_ITEMS'
 export const RECEIVE_ITEMS = 'RECEIVE_ITEMS'
 export const ADD_ITEM = 'ADD_ITEM'
 export const SUBMIT_FORM = 'SUBMIT_FORM'
@@ -20,7 +18,6 @@ export const UPDATE_ITEM = 'UPDATE_ITEM'
 
 export type Action =
   | { type: 'RECEIVE_ITEMS'; payload: FurnitureModel[] }
-  // | { type: 'SUBMIT_FORM'; payload: boolean }
   | { type: 'ADD_ITEM'; payload: FurnitureModel }
   | { type: 'DEL_ITEM'; payload: number }
   | {
@@ -37,14 +34,6 @@ function receiveAllItems(dbData: FurnitureModel[]): Action {
     payload: dbData,
   }
 }
-
-// SUBMIT ADD FORM
-// function addFormSubmit(): Action {
-//   return {
-//     type: 'SUBMIT_FORM',
-//     payload: true,
-//   }
-// }
 
 // ADD ITEM
 function addNewItem(newItem: FurnitureModel): Action {
@@ -90,9 +79,6 @@ export function fetchAllThunk(): ThunkAction {
 // ADD Item Thunk
 export function addNewItemThunk(formInput: FurnitureModel): ThunkAction {
   return (dispatch) => {
-    // NOT NEEDED
-    // dispatch(addFormSubmit())
-    // addItem API function
     return (
       addFurnItemApi(formInput)
         // then dispatch the added item to the reducer

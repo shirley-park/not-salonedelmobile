@@ -78,37 +78,6 @@ function AddItemForm() {
             Add
           </button>
         </Box>
-
-        {/* <label>
-            Item name:
-            <input
-              onChange={changeHandler}
-              type="text"
-              id="name"
-              value={formDeets.name || ''}
-            />
-            <br />
-          </label>
-          <label>
-            Designer:
-            <input
-              onChange={changeHandler}
-              type="text"
-              id="designer"
-              value={formDeets.designer || ''}
-            />
-            <br />
-          </label>
-          <label>
-            imageURL:
-            <input
-              onChange={changeHandler}
-              type="text"
-              id="imageURL"
-              value={formDeets.imageURL || ''}
-            />
-          </label> */}
-        {/* </form> */}
       </div>
     </>
   )
