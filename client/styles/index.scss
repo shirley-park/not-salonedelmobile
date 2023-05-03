@@ -1,14 +1,9 @@
 .app-container {
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // margin: 200px 175px 200px 175px;
   top: 2em;
   left: 2em;
   margin: 0;
   padding: 20px;
   font-family: 'Jost', sans-serif;
-// font-family: 'Work Sans', sans-serif;
   font-weight: 200;
 }
 
@@ -33,16 +28,7 @@ section .cardContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  // gap: 20px;
 
-  // >>>> using Flexbox
-  // display: flex;
-  // flex-direction: row-reverse;
-  // justify-content: center;
-  // align-items: flex-end;
-  // flex-wrap: wrap-reverse;
-  // align-content: center;
-  // align-items: center;
 }
 
 // Cards
@@ -52,7 +38,6 @@ section .cardContainer {
   margin-right: 20px;
   padding: 1.5em;
   border-bottom: 1px solid rgba(148, 148, 148, 0.438);
-  // border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -86,7 +71,6 @@ color:rgb(105, 105, 105)
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  // align-items: center;
   border: .75px solid gainsboro;
 }
 
@@ -124,10 +108,6 @@ color:rgb(105, 105, 105)
 /* ----- Media queries ----- */
 
 @media screen and (max-width: 767px) {
-  // .container {
-  //   margin: 25px;
-  // }
-
   section .cardContainer {
     margin-left: 10px;
     margin-right: 10px;
@@ -143,15 +123,10 @@ color:rgb(105, 105, 105)
 }
 
 @media screen and (min-width: 768px) and (max-width: 1000px){
-  // .container {
-  //   margin: 30px 50px;
-  // }
-
   section .cardContainer {
     margin-left: 80px;
     margin-right: 80px;
     display: grid;
     grid-template-columns: 2fr 2fr;
   }
-
 }
