@@ -1,4 +1,4 @@
-## This is Not Salone Del Mobile
+## This is Not Salone Del Mobile 🛋️
 
 The beginnings of a personal furniture showroom using Redux and api-database interactions.
 Add your collection of design objects to the salone!
