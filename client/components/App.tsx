@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <header className="header">
-        <h1>My Collection</h1>
+        <h1>Not Salone Del Mobile</h1>
       </header>
       <div>
         <AddItemForm />
